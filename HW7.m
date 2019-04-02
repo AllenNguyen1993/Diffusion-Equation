@@ -64,9 +64,7 @@ for F=1:N
 end
 error= (1/N)*sum(error_indiv)
     
-        
-
-     
+ 
         
     
  
