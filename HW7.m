@@ -33,7 +33,7 @@ end
 for E=1:t     %E is index for time (E=1 is t=0)
     for j=2:N+1   %j is index for space 
         right_side(E,j-1)=(gamma/2)*u(E,j-1)+(1-gamma)*u(E,j)+(gamma/2)*u(E,j+1);
-        t_j(E)=E*del_t; %t_j is in different loop than x_j since points in time anad space can be different)
+        t_j(E)=E*del_t; %t_j is in different loop than x_j since the number of  points in time nad space can be different)
     end
     
 g=[right_side(:,1),zeros(t+1,N-1)];
@@ -51,13 +51,13 @@ u(E+1,N+1)=g(E,N)/alpha(E,N); %N+1 is the point right behind the boundary point
     end
     
 end
-%time=input('Please enter the point of time you want to look at:' )
-%time_point=round(time/del_t);
-%time_slice=t_j(t);
- u_exact=(exp(-D*(k^2)*10))*sin(k*x_j);
+time=input('Please enter the point of time you want to look at:' )
+time_point=round(time/del_t);
+time_slice=t_j(time);
+ u_exact=(exp(-D*(k^2)*time_slice))*sin(k*x_j);
 plot(x_j,u_exact)
 hold 
-plot(x_j,u(t+1,[2:N+1]))
+plot(x_j,u(t+1,[2:N+1])) %plot at T=10 (which is the final line in the u martix)
 error_indiv=zeros(1,N);
 for F=1:N
     error_indiv(F)=abs((u(t+1,F+1)-u_exact(F))/u_exact(F));
