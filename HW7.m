@@ -60,7 +60,7 @@ hold
 plot(x_j,u(2,[2:N+1]))
 error_indiv=zeros(1,N);
 for F=1:N
-    error_indiv(F)=abs((u(t,F+1)-u_exact(F))-u_exact(F));
+    error_indiv(F)=abs((u(t,F+1)-u_exact(F))/u_exact(F));
 end
 error= (1/N)*sum(error_indiv)
     
