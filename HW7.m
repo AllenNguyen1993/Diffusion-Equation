@@ -25,15 +25,15 @@ t_j=zeros(1,t);
 
 for A=2:N+1  
     u(1,A)=sin(k*(del_x*(A-1))); % this computes the condition at t=0 along space direction
-    x_j(A-1)=A*del_x;
-    t_j(A-1)=A*del_t;
+    x_j(A-1)=(A-1)*del_x;
+    
 end
 
 
 for E=1:t     %E is index for time (E=1 is t=0)
     for j=2:N+1   %j is index for space 
         right_side(E,j-1)=(gamma/2)*u(E,j-1)+(1-gamma)*u(E,j)+(gamma/2)*u(E,j+1);
-        
+        t_j(A-1)=(A-1)*del_t;
     end
     
 g=[right_side(:,1),zeros(t+1,N-1)];
@@ -60,7 +60,7 @@ hold
 plot(x_j,u(2,[2:N+1]))
 error_indiv=zeros(1,N);
 for F=1:N
-    error_indiv(F)=abs((u(t,F+1)-u_exact(F))/u_exact(F));
+    error_indiv(F)=abs((u(t+1,F+1)-u_exact(F))/u_exact(F));
 end
 error= (1/N)*sum(error_indiv)
     
