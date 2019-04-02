@@ -3,8 +3,8 @@ multiple_t=input('please enter a multiple for t: ');
 multiple_x=input('please enter a multiple for n: ');
 L=pi;
 T=10;
-t=10*multiple_t; %Number of points in time, not counting the boundary point
-N=10*multiple_x; %Number of points in space, not counting the point at t=0
+t=10*multiple_t; %Number of points in time
+N=10*multiple_x; %Number of points in space
 del_x=L/(N+1); %N+1 is number of segments in space
 del_t=T/(t+1) ; %t+1 is number of segments in time
 D=0.1; 
