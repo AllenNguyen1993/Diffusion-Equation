@@ -3,7 +3,7 @@ multiple_t=input('please enter a multiple for t: ');
 multiple_x=input('please enter a multiple for n: ');
 L=pi;
 T=10;
-t=10*multiple_t; %Number of points in time, not counting the boundary point
+t=10*multiple_t; %Number of points in time, not counting the 2 boundary points
 N=10*multiple_x; %Number of points in space, not counting the point at t=0
 del_x=L/(N+1); %N+1 is number of segments in space
 del_t=T/(t+1) ; %t+1 is number of segments in time
@@ -20,7 +20,7 @@ u=[zeros(t+1,1),zeros(t+1,N),zeros(t+1,1)];
 right_side=zeros(t+1,N);
 x_j=zeros(1,N);
 t_j=zeros(1,t);
-
+%u_exact=
   
 
 for A=2:N+1  
@@ -53,13 +53,16 @@ u(E+1,N+1)=g(E,N)/alpha(E,N); %N+1 is the point right behind the boundary point
 end
 %time=input('Please enter the point of time you want to look at:' )
 %time_point=round(time/del_t);
-time_slice=t_j();
+time_slice=t_j(t);
 u_exact=(exp(-D*(k^2)*time_slice))*sin(k*x_j);
 plot(x_j,u_exact)
 hold 
 plot(x_j,u(2,[2:N+1]))
-for F= 
-error= 
+error_indiv=zeros(1,N);
+for F=1:N
+    error_indiv(F)=abs((u(t,F+1)-u_exact(F))-u_exact(F));
+end
+error= (1/N)*sum(error_indiv)
     
         
 
