@@ -30,7 +30,7 @@ for A=2:N+1
 end
 
 
-for E=1:t+1     %E is index for time (E=1 is t=0)
+for E=1:t     %E is index for time (E=1 is t=0)
     for j=2:N+1   %j is index for space 
         right_side(E,j-1)=(gamma/2)*u(E,j-1)+(1-gamma)*u(E,j)+(gamma/2)*u(E,j+1);
         
