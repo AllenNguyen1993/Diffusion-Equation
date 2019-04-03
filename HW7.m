@@ -57,7 +57,7 @@ time_slice=t_j(time_point);
  u_exact=(exp(-D*(k^2)*time_slice))*sin(k*x_j);
 plot(x_j,u_exact)
 hold 
-plot(x_j,u(t+2,[2:N+1])) %plot at T=10 (which is the final line in the u martix)
+plot(x_j,u(time_point,[2:N+1])) %plot at T=10 (which is the final line in the u martix)
 error_indiv=zeros(1,N);
 for F=1:N
     error_indiv(F)=abs((u(t+2,F+1)-u_exact(F))/u_exact(F));
