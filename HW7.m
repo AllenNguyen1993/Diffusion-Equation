@@ -62,7 +62,7 @@ error_indiv=zeros(1,N);
 for F=1:N
     error_indiv(F)=abs((u(t+2,F+1)-u_exact(F))/u_exact(F));
 end
-error= (1/N)*sum(error_indiv)
+error= (1/N)*sum(error_indiv) 
     
  
          
