@@ -26,7 +26,8 @@ end
 g_0=sin(omega*t_j);    %Computing boundary conditions at diffrerent time points
 g_L=sin(omega*t_j);
 u_numerical=[g_0;zeros(N_points,t_points+2);g_L];
-
+u_exact=(sin(omega*t_j(t_points+2)))*cos(k*x_j); 
+plot(x_j,u_exact)
  
 
 

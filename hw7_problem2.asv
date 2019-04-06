@@ -12,17 +12,21 @@ F=zeros(N_points+2,t_points+2);
 
 %Rows represent diffent positions;
 %Columns represent different times;
-t_j=zeros(1,[0,t_points,T];
+t_j=[0,zeros(1,t_points),T];
 x_j=zeros(1,N_points);
 
 for A=2:t_points+1    %Computing time point with given corresponding time indices
   t_j(A)=del_t*(A-1);  %t_points+2 is the last time point
 end                     %1 corresponds to the first time point (t=0)
 
-for B=1
+for B=1:N_points
+    x_j(B)=del_x*(B)
+end
+
 g_0=sin(omega*t_j);    %Computing boundary conditions at diffrerent time points
 g_L=sin(omega*t_j);
 u_numerical=[g_0;zeros(N_points,t_points+2);g_L];
+u_exact=(sin(omega*t_j))*cos(k*x_j)
 
  
 
