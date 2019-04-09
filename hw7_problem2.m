@@ -30,22 +30,22 @@ g_L=sin(omega*t_j);
 u_numerical=[g_0;zeros(N_points,t_points+2);g_L];
 right_side_first=zeros(1,t_points+1)    %first refers to the first element in the matrix on the right hand side
 right_side_last=zeros(1,t_points+1)     %last refers to the last element in the matrix on the left had side
-right_side= [right_side_first;zero(N_points-2,t_points+1);right_side_last]; 
-a=zeros(1,N_points);
-b=zeros(1,N_points);
-c=zeros(1,N_points-1);
+right_side= [right_side_first;zeros(N_points-2,t_points+1);right_side_last]; 
+a=(1+gamma)*ones(1,N_points);
+b=(-gamma/2)*ones(1,N_points);
+c=(-gamma/2)*ones(1,N_points-1);
 
 for C=1:t_points+1
+    
     for E=1:N_points
       F(E,C)=(omega*cos(omega*del_t*(C-1))+D*(k^2)*sin(omega*del_t*(C-1)))*cos(k*del_x*(E));
     end
     
- right_side_first(C)=(gamma/2)*u_numerical(1,C)+(1-gamma)*u_numerical(2,C)+(gamma/2)*u_numerical(3,C)+ del_t*F(E,C)+(gamma/2)*u_numerical(1,C+1);
+ right_side_first(C)=(gamma/2)*u_numerical(1,C)+(1-gamma)*u_numerical(2,C)+(gamma/2)*u_numerical(3,C)+ del_t*F(E,C)+(gamma/2)*g_0(C+1);
  right_side_last(C)=(gamma/2)*u_numerical(N_points-1,C)+(1-gamma)*u_numerical(N_points,C)+(gamma/2)*u_numerical(N_points+1,E)+del_t*F(N_points,C)+(gamma/2)*g_L(C+1);  
  
-    for G=1
-      
-      right_side(E+1,C)=(gamma/2)*u_numerical(E-1,C)+(1-gamma)*u_numerical(E,C)+(gamma/2)*u_numerical(E+1,C)+del_t*F(E,C)
+    for G=2
+      right_side(G,C)=(gamma/2)*u_numerical(G-1,C)+(1-gamma)*u_numerical(G,C)+(gamma/2)*u_numerical(G+1,C)+del_t*F(G,C);
     end
 end
 u_exact=(sin(omega*t_j(t_points+2)))*cos(k*x_j); 
