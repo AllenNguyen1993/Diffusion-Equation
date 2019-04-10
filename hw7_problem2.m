@@ -14,8 +14,6 @@ b=(-gamma/2)*ones(1,N_points);
 c=(-gamma/2)*ones(1,N_points-1);
 alpha_1=a(1);
 alpha=[alpha_1,zeros(1,N_points-1)]; %alpha is a vector instead of matrix since alpha is constant in time
-
-
 %Rows represent different positions;
 %Columns represent different times;
 t_j=[0,zeros(1,t_points),T];
@@ -71,7 +69,7 @@ for C=1:t_points+1    %C=1 is equivalent of t=0, C=t_points+2 is equivalent of t
     end
     
 end
-
+ 
 u_exact=(sin(omega*t_j(t_points+2)))*cos(k*x_j);
 plot(x_j,u_exact)
 hold on
