@@ -57,7 +57,7 @@ for C=1:t_points+1    %C=1 is equivalent of t=0
       right_side(G,C)=(gamma/2)*u_numerical(G-1,C)+(1-gamma)*u_numerical(G,C)+(gamma/2)*u_numerical(G+1,C)+del_t*F(G,C);
     end
     
- g=[right_side(1,:);zeros(N_points-1,t_points)];
+ g=[right_side(1,:);zeros(N_points-1,t_points+1)];
  
     for H=2:N_points
       g(H,C)=right_side(H,C)-((b(H)*g(H-1,C))/alpha(H-1));
@@ -66,7 +66,7 @@ for C=1:t_points+1    %C=1 is equivalent of t=0
   u_numerical(N_points+1,C+1)=g(N_points,C)/alpha(N_points)
   
     for HI=N_points:-1:2
-       u_numerical(HI,C+1)=(g(HI,C)-(c(HI)*u_numerical(HI+1,C+1)))/alpha(HI);
+       u_numerical(HI,C+1)=(g(HI-1,C)-(c(HI-1)*u_numerical(HI+1,C+1)))/alpha(HI-1);
     end
     
 end
