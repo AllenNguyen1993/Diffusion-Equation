@@ -13,7 +13,7 @@ a=(1+gamma)*ones(1,N_points);
 b=(-gamma/2)*ones(1,N_points);
 c=(-gamma/2)*ones(1,N_points-1);
 alpha_1=a(1);
-alpha=[alpha_1,zeros(1,N_points-1)];
+alpha=[alpha_1,zeros(1,N_points-1)]; %alpha is a vector instead of matrix since alpha is constant in time
 
 
 %Rows represent different positions;
@@ -44,7 +44,7 @@ right_side_last=zeros(1,t_points+1)     %last refers to the last element in the 
 right_side= [right_side_first;zeros(N_points-2,t_points+1);right_side_last]; 
 
 
-for C=1:t_points+1
+for C=1:t_points+1    %C=1 is equivalent of t=0
     
     for E=1:N_points
       F(E,C)=(omega*cos(omega*del_t*(C-1))+D*(k^2)*sin(omega*del_t*(C-1)))*cos(k*del_x*(E));
@@ -57,10 +57,16 @@ for C=1:t_points+1
       right_side(G,C)=(gamma/2)*u_numerical(G-1,C)+(1-gamma)*u_numerical(G,C)+(gamma/2)*u_numerical(G+1,C)+del_t*F(G,C);
     end
     
- g=[right_side(1,C);zeros(N_points-1,C)];
+ g=[right_side(1,:);zeros(N_points-1,t_points)];
  
     for H=2:N_points
-      g(H,C)=right_side(H,C)-((b(H)*g(H-1,C))/alpha(H-1);
+      g(H,C)=right_side(H,C)-((b(H)*g(H-1,C))/alpha(H-1));
+    end
+    
+  u_numerical(N_points+1,C+1)=g(N_points,C)/alpha(N_points)
+  
+    for HI=N_points:-1:2
+       u_numerical(HI,C+1)=(g(HI,C)-(c(HI)*u_numerical(HI+1,C+1)))/alpha(HI);
     end
     
 end
