@@ -23,7 +23,7 @@ x_j=zeros(1,N_points);
 right_side_first=zeros(1,t_points+1);    %first refers to the first element in the matrix on the right hand side
 right_side_last=zeros(1,t_points+1);     %last refers to the last element in the matrix on the left had side
 
-for A=2:t_points+2    %Computing time point with given corresponding time indices
+for A=2:t_points+1    %Computing time point with given corresponding time indices
   t_j(A)=del_t*(A-1);  %t_points+2 is the last time point
 end                     %1 corresponds to the first time point (t=0)
 
@@ -44,14 +44,14 @@ right_side_last=zeros(1,t_points+1);     %last refers to the last element in the
 
 
 
-for C=1:t_points+1    %C=1 is equivalent of t=0
+for C=1:t_points+1    %C=1 is equivalent of t=0, C=t_points+2 is equivalent of t=T
     
     for E=1:N_points
       F(E,C)=(omega*cos(omega*del_t*(C-1))+D*(k^2)*sin(omega*del_t*(C-1)))*cos(k*del_x*(E));
     end
     
- right_side_first(C)=(gamma/2)*u_numerical(1,C)+(1-gamma)*u_numerical(2,C)+(gamma/2)*u_numerical(3,C)+ del_t*F(E,C)+(gamma/2)*g_0(C+1);
- right_side_last(C)=(gamma/2)*u_numerical(N_points-1,C)+(1-gamma)*u_numerical(N_points,C)+(gamma/2)*u_numerical(N_points+1,E)+del_t*F(N_points,C)+(gamma/2)*g_L(C+1);  
+ right_side_first(C)=(gamma/2)*u_numerical(1,C)+(1-gamma)*u_numerical(2,C)+(gamma/2)*u_numerical(3,C)+ del_t*F(1,C)+(gamma/2)*g_0(C+1);
+ right_side_last(C)=(gamma/2)*u_numerical(N_points,C)+(1-gamma)*u_numerical(N_points+1,C)+(gamma/2)*u_numerical(N_points+2,E)+del_t*F(N_points,C)+(gamma/2)*g_L(C+1);  
  right_side= [right_side_first;zeros(N_points-2,t_points+1);right_side_last]; 
  
     for G=2:N_points-1
