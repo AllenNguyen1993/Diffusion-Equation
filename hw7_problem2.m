@@ -1,4 +1,4 @@
-k=input('please enter a value for k (1 is recommended): ');
+ k=input('please enter a value for k (1 is recommended): ');
 N_points=input ('Please enter number of internal points in space: ');
 t_points=input ('Please enter numbers of internal points in time: ');
 omega=input('Please enter a value for omega: ');  
@@ -31,8 +31,7 @@ end
 for AI=2:N_points
      alpha(AI)=a(AI)-((b(AI)*c(AI-1))/alpha(AI-1));
 end
-
-g_0=sin(omega*t_j);    %Computing boundary conditions at diffrerent time points
+ g_0=sin(omega*t_j);    %Computing boundary conditions at diffrerent time points
 g_L=sin(omega*t_j)*cos(k*L);
 u_numerical=[g_0;zeros(N_points,t_points+2);g_L];
 right_side_first=zeros(1,t_points+1);   %first refers to the first element in the matrix on the right hand side
@@ -48,7 +47,7 @@ for C=1:t_points+1    %C=1 is equivalent of t=0, C=t_points+2 is equivalent of t
     end
     
  right_side_first(C)=(gamma/2)*u_numerical(1,C)+(1-gamma)*u_numerical(2,C)+(gamma/2)*u_numerical(3,C)+ del_t*F(1,C)+(gamma/2)*g_0(C+1);
- right_side_last(C)=(gamma/2)*u_numerical(N_points,C)+(1-gamma)*u_numerical(N_points+1,C)+(gamma/2)*u_numerical(N_points+2,E)+del_t*F(N_points,C)+(gamma/2)*g_L(C+1);  
+ right_side_last(C)=(gamma/2)*u_numerical(N_points,C)+(1-gamma)*u_numerical(N_points+1,C)+(gamma/2)*u_numerical(N_points+2,C)+del_t*F(N_points,C)+(gamma/2)*g_L(C+1);  
  right_side([1,N_points],C)=[right_side_first(C),right_side_last(C)];
  
     for G=2:N_points-1
